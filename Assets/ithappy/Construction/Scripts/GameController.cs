@@ -139,6 +139,15 @@ public class GameController : MonoBehaviour
                 break;
             default: break;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+                        Application.Quit();
+#endif
+        }
     }
 
     void Info(string s)
@@ -168,7 +177,7 @@ public class GameController : MonoBehaviour
         string saveFolder = Path.Combine(projectPath, "OutputFiles");
 #else
         // 发布后仍然保存到持久化路径
-        string saveFolder = Application.persistentDataPath;
+        string saveFolder = Application.persistentDataPath+"/OutputFiles/";
 #endif
 
         // 生成文件名（示例：20231023_153045.txt）
